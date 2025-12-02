@@ -133,3 +133,12 @@ select:focus {
   outline: none;
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
 }
+
+.btn-edit {
+  background: #007bff;
+  margin-right: 5px;
+}
+
+.btn-edit:hover {
+  background: #005ec2;
+}

@@ -7,31 +7,52 @@ html
   body
     .form-container
       a.add-link(href="/") < Return to the homepage
-      h1 Add a New Custom Object Record
+      h1 Add/Update Custom Object Record
       br
-      form(action="/update-real-estate" method="POST")
+      form(action=id ? `/update-real-estate?id=${id}` : "/update-real-estate" method="POST")
         label Name:
-        input(type="text", name="name", required)
+        input(type="text", name="name", required value=(record ? record.properties.name : ""))
 
         label Price:
-        input(type="number", name="price", required)
+        input(type="number", name="price", required value=(record ? record.properties.price : ""))
 
         label Area (sq ft):
-        input(type="number", name="area", required)
+        input(type="number", name="area", required value=(record ? record.properties.price : ""))
 
         label Property Type:
         select(name="property_type", required)
-            option(value="" disabled selected) Select Property Type
-            option(value="Apartment") Apartment
-            option(value="Villa") Villa
-            option(value="Plot") Plot
-            option(value="Commercial") Commercial
+            option(value="" disabled selected)= record ? "" : "Select Property Type"
+            option(
+            value="Apartment"
+            selected=record && record.properties.property_type == "Apartment"
+            ) Apartment
+            option(
+            value="Villa"
+            selected=record && record.properties.property_type == "Villa"
+            ) Villa
+            option(
+            value="Plot"
+            selected=record && record.properties.property_type == "Plot"
+            ) Plot
+            option(
+            value="Commercial"
+            selected=record && record.properties.property_type == "Commercial"
+            ) Commercial
 
         label Status:
-        select(name="status", required)
-            option(value="" disabled selected) Select Status
-            option(value="Available") Available
-            option(value="Sold") Sold
-            option(value="Pending") Pending
+        select(name="status" required)
+            option(value="" disabled selected)= record ? "" : "Select Status"
+            option(
+            value="Available"
+            selected=record && record.properties.status == "Available"
+            ) Available
+            option(
+            value="Sold"
+            selected=record && record.properties.status == "Sold"
+            ) Sold
+            option(
+            value="Pending"
+            selected=record && record.properties.status == "Pending"
+            ) Pending
 
-        button(type="submit") Create Record
+        button(type="submit")= id ? "Update Record" : "Create Record"

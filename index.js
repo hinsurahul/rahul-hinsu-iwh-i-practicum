@@ -29,20 +29,41 @@ app.get('/', async (req, res) => {
 });
 
 
-app.get("/update-real-estate", (req, res) => {
+app.get("/update-real-estate", async (req, res) => {
+ const id = req.query.id;
+  let record = null;
+
   try {
+    if (id) {
+      const url = `https://api.hubapi.com/crm/v3/objects/2-53855425/${id}?properties=name,price,area__sq__ft_,property_type,status`;
+      
+      const resp = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+          "Content-Type": "application/json"
+        }
+      });
+
+      record = resp.data;   // contains properties
+    }
+// res.json(record)
     res.render("updates", {
-      title: "Add Record"
+      title: id ? "Edit Record" : "Add Record",
+      record,
+      id
     });
+
   } catch (err) {
-    console.error(err);
-    res.send("Error loading form");
+    console.error(err.response?.data || err);
+    res.send("Error loading record");
   }
 });
 
 
-// Add Record
+// Add/Edit Record
 app.post("/update-real-estate", async (req, res) => {
+  const id = req.query.id;
+
   const payload = {
     properties: {
       name: req.body.name,
@@ -54,17 +75,29 @@ app.post("/update-real-estate", async (req, res) => {
   };
 
   try {
-    
-    await axios.post(
-      "https://api.hubapi.com/crm/v3/objects/2-53855425",
-      payload,
-      {
-        headers: {
-          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-          "Content-Type": "application/json"
+    if (id) {
+      await axios.patch(
+        `https://api.hubapi.com/crm/v3/objects/2-53855425/${id}`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            "Content-Type": "application/json"
+          }
         }
-      }
-    );
+      );
+    } else {
+      await axios.post(
+        "https://api.hubapi.com/crm/v3/objects/2-53855425",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+            "Content-Type": "application/json"
+          }
+        }
+      );
+    }
 
     res.redirect("/");
 

@@ -17,7 +17,7 @@ html
             th Area (sqft)
             th Type
             th Status
-           
+            th Actions
 
         tbody
           each item in data
@@ -28,3 +28,5 @@ html
               td #{item.properties.area__sq__ft_}
               td #{item.properties.property_type || "N/A"}
               td #{item.properties.status || "Unknown"}
+              td 
+                a.btn.btn-edit(href=`/update-real-estate?id=${item.id}`) Edit
