@@ -107,6 +107,31 @@ app.post("/update-real-estate", async (req, res) => {
   }
 });
 
+// remove record
+app.post("/delete-real-estate", async (req, res) => {
+  const id = req.query.id;
+
+  if (!id) {
+    return res.send("No ID provided");
+  }
+
+  try {
+    const url = `https://api.hubapi.com/crm/v3/objects/2-53855425/${id}`;
+
+    await axios.delete(url, {
+      headers: {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    res.redirect("/");
+
+  } catch (err) {
+    //console.error("Delete Error:", err.response?.data || err.message);
+    res.send("Error deleting record");
+  }
+});
 
 
 // * Localhost

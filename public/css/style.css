@@ -142,3 +142,13 @@ select:focus {
 .btn-edit:hover {
   background: #005ec2;
 }
+
+.btn-delete {
+  background: #dc3545;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #b52a35;
+}
