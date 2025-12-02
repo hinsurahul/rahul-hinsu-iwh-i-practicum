@@ -4,55 +4,57 @@ body, * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-    margin: 1rem;
+.page-center {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 25px;
+}
+.page-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #222;
+}
+.property-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
-.cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+.property-table thead {
+  background: #007bff;
+  color: white;
 }
 
-.card {
-    flex-basis: 31%;
-    margin: 1rem 0.4rem;
-    padding: 1rem 0.4rem 2.5rem 0.4rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.property-table th {
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
 }
 
-.card__email {
-    font-size: 1rem;
+.property-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
 }
 
-.form-wrapper {
-    font-size: 18px;
-    max-width: 768px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: solid 1px lightgrey;
-    border-radius: 15px;
-    box-shadow: 3px 2px 6px lightgrey;
+.property-table tbody tr:nth-child(even) {
+  background: #f8f9fc;
 }
 
-label, input {
-    margin-top: 5px;
-    display: block;
-    font-size: inherit;
-}
-
-input[type="text"] {
-    padding: .25rem;
-}
-
-input[type="submit"] {
-    background-color: lightgrey;
-    border: none;
-    padding: .375rem 1rem;
-    margin-top: 10px;
+.btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
 }

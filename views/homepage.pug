@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Property List (Table View)
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+    .page-center
+      h1.page-title Real Estate Properties (Table View)
+      table.property-table
+        thead
+          tr
+            th Name
+            th Price
+            th Area (sqft)
+            th Type
+            th Status
+           
+
+        tbody
+          each item in data
+            tr
+             
+              td #{item.properties.name}
+              td $#{item.properties.price}
+              td #{item.properties.area__sq__ft_}
+              td #{item.properties.property_type || "N/A"}
+              td #{item.properties.status || "Unknown"}
