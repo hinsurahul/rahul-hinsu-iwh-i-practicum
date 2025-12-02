@@ -13,7 +13,6 @@ body, * {
   padding: 25px;
 }
 .page-title {
-  text-align: center;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 25px;
@@ -57,4 +56,80 @@ body, * {
   text-decoration: none;
   color: white;
   text-align: center;
+}
+
+a {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+
+a.add-link {
+    display: inline-block;
+}
+
+
+label {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+
+button, .button {
+  /* width: 100%; */
+  background: #007bff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover, .button:hover {
+  background: #005ec2;
+}
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 15px;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  background: white;
+  transition: 0.3s;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
 }

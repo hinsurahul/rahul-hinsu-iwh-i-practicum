@@ -13,7 +13,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS;
 
 
 app.get('/', async (req, res) => {
-    const contacts = 'https://api.hubapi.com/crm/v3/objects/2-53855425?properties=area__sq__ft_,name,price,address,property_type,status&archived=false';
+    const contacts = 'https://api.hubapi.com/crm/v3/objects/2-53855425?properties=area__sq__ft_,name,price,property_type,status&archived=false';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -22,55 +22,58 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(contacts, { headers });
         const data = resp.data.results;
         // res.json(data)
-        res.render('homepage', { title: 'Contacts | HubSpot APIs', data });      
+        res.render('homepage', { title: 'Home | Real Estate', data });      
     } catch (error) {
         console.error(error);
     }
 });
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
 
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
+app.get("/update-real-estate", (req, res) => {
+  try {
+    res.render("updates", {
+      title: "Add Record"
+    });
+  } catch (err) {
+    console.error(err);
+    res.send("Error loading form");
+  }
 });
 
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
+
+// Add Record
+app.post("/update-real-estate", async (req, res) => {
+  const payload = {
+    properties: {
+      name: req.body.name,
+      price: req.body.price,
+      area__sq__ft_: req.body.area,
+      property_type: req.body.property_type,
+      status: req.body.status
+    }
+  };
+
+  try {
+    
+    await axios.post(
+      "https://api.hubapi.com/crm/v3/objects/2-53855425",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+          "Content-Type": "application/json"
         }
-    }
+      }
+    );
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
+    res.redirect("/");
 
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
+  } catch (err) {
+    console.error(err.response?.data || err);
+    res.send("Error saving record");
+  }
 });
-*/
+
 
 
 // * Localhost

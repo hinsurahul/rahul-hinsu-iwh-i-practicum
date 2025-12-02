@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    .form-container
+      a.add-link(href="/") < Return to the homepage
+      h1 Add a New Custom Object Record
+      br
+      form(action="/update-real-estate" method="POST")
+        label Name:
+        input(type="text", name="name", required)
+
+        label Price:
+        input(type="number", name="price", required)
+
+        label Area (sq ft):
+        input(type="number", name="area", required)
+
+        label Property Type:
+        select(name="property_type", required)
+            option(value="" disabled selected) Select Property Type
+            option(value="Apartment") Apartment
+            option(value="Villa") Villa
+            option(value="Plot") Plot
+            option(value="Commercial") Commercial
+
+        label Status:
+        select(name="status", required)
+            option(value="" disabled selected) Select Status
+            option(value="Available") Available
+            option(value="Sold") Sold
+            option(value="Pending") Pending
+
+        button(type="submit") Create Record
